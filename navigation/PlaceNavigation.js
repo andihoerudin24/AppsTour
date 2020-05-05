@@ -2,11 +2,12 @@ import React from "react";
 import { Platform } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import PlacesListScreen from "../screnns/PlacesListScreen";
+import PlacesListScreen,{screenOptions} from "../screnns/PlacesListScreen";
 import PlacesDetailScreen from "../screnns/PlaceDetailScreen";
 import NewPlacesScreen from "../screnns/NewPlaceScreen";
 import MapScreen from "../screnns/MapScreen";
 import Color from "../constants/Color";
+
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ const PlacesNavigator = () => {
           headerTintColor: Platform.OS == "android" ? "white" : Color.primary
         }}
       >
-        <Stack.Screen name="Places" component={PlacesListScreen} />
+        <Stack.Screen name="Places" component={PlacesListScreen} options={screenOptions} />
         <Stack.Screen name="PlaceDetail" component={PlacesDetailScreen} />
         <Stack.Screen name="NewPlace" component={NewPlacesScreen} />
         <Stack.Screen name="Map" component={MapScreen} />
