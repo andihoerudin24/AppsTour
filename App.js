@@ -1,10 +1,10 @@
-import React from 'react';
-import {
-  View,
-  Text
-} from 'react-native';
-const App = props =>{
-   return(
-     <View><Text>app</Text></View>
-   )
-}
+import React from "react";
+import PlacesNavigator from './navigation/PlaceNavigation'
+
+const App = () => {
+  return (
+    <PlacesNavigator/>
+  );
+};
+
+export default App;
