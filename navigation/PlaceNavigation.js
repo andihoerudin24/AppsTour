@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import PlacesListScreen,{screenOptions} from "../screnns/PlacesListScreen";
 import PlacesDetailScreen from "../screnns/PlaceDetailScreen";
-import NewPlacesScreen from "../screnns/NewPlaceScreen";
+import NewPlacesScreen,{screenoptions} from "../screnns/NewPlaceScreen";
 import MapScreen from "../screnns/MapScreen";
 import Color from "../constants/Color";
 
@@ -24,7 +24,7 @@ const PlacesNavigator = () => {
       >
         <Stack.Screen name="Places" component={PlacesListScreen} options={screenOptions} />
         <Stack.Screen name="PlaceDetail" component={PlacesDetailScreen} />
-        <Stack.Screen name="NewPlace" component={NewPlacesScreen} />
+        <Stack.Screen name="NewPlace" component={NewPlacesScreen} options={screenoptions} />
         <Stack.Screen name="Map" component={MapScreen} />
       </Stack.Navigator>
     </NavigationContainer>

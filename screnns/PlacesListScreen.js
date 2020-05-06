@@ -19,9 +19,9 @@ export const screenOptions = navData =>{
               <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                   title="Cart"
-                  iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+                  iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
                   onPress={() => {
-                      navData.navigation.navigate('Cart')
+                      navData.navigation.navigate('NewPlace')
                   }}
                 />
               </HeaderButtons>
