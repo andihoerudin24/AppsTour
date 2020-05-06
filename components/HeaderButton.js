@@ -3,9 +3,9 @@ import { HeaderButton } from "react-navigation-header-buttons";
 import Colors from "../constants/Color";
 import { Platform } from "react-native";
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-const CustomHeaderButton = props => {
+const CustomHeaderButton = (props) => {
   return (
     <HeaderButton
       {...props}

@@ -1,24 +1,42 @@
-import React,{useState} from "react";
-import {ScrollView,View, Button,Text, StyleSheet, TextInput } from "react-native";
+import React, { useState } from "react";
+import {
+  ScrollView,
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 import Color from "../constants/Color";
+import { useDispatch } from "react-redux";
+import * as placesActions from "../store/places-actions";
 
-const NewPlaceScreen = (props) => { 
-  const [titleValue,setTitleValue] = useState('')
-  const titleChangeHandler =  text =>{
-         
-        setTitleValue(text)
-  }
+const NewPlaceScreen = (props) => {
+  const dispatch = useDispatch();
+  const [titleValue, setTitleValue] = useState("");
+  const titleChangeHandler = (text) => {
+    setTitleValue(text);
+  };
 
-  const savePlaceHandler = () =>{
-
-  }
+  const savePlaceHandler = () => {
+    dispatch(placesActions.addPlace(titleValue));
+    props.navigation.goBack();
+  };
   return (
-      <ScrollView>
-    <View style={styles.form}>
+    <ScrollView>
+      <View style={styles.form}>
         <Text style={styles.label}>Title</Text>
-        <TextInput style={styles.textinput} onChangeText={titleChangeHandler} value={titleValue}/>
-        <Button title="save place" color={Color.primary} onPress={savePlaceHandler}/>
-    </View>
+        <TextInput
+          style={styles.textinput}
+          onChangeText={titleChangeHandler}
+          value={titleValue}
+        />
+        <Button
+          title="save place"
+          color={Color.primary}
+          onPress={savePlaceHandler}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -30,20 +48,20 @@ export const screenoptions = (navData) => {
 };
 
 const styles = StyleSheet.create({
-    form:{
-        margin:30        
-      },
-      label:{
-          fontSize:18,
-          marginBottom:15
-      },
-      textinput:{
-          borderBottomColor:'#ccc',
-          borderBottomWidth:1,
-          marginBottom:15,
-          paddingVertical:4,
-          paddingHorizontal:2,
-      }
+  form: {
+    margin: 30,
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 15,
+  },
+  textinput: {
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    marginBottom: 15,
+    paddingVertical: 4,
+    paddingHorizontal: 2,
+  },
 });
 
 export default NewPlaceScreen;
