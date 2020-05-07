@@ -79,6 +79,10 @@ target 'MyApp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
+  pod 'RNOpenAppSettings', :path => '../node_modules/react-native-app-settings'
+
   target 'MyAppTests' do
     inherit! :complete
     # Pods for testing
