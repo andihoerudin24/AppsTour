@@ -9,26 +9,42 @@ import {
   Alert,
 } from "react-native";
 import Color from "../constants/Color";
-import ImagePicker from "react-native-image-crop-picker";
-import OpenAppSettings from "react-native-app-settings";
+//import ImagePicker from "react-native-image-crop-picker";
+import * as ImagePicker from 'expo-image-picker';
+//import OpenAppSettings from "react-native-app-settings";
 
 const ImagePickers = (props) => {
   const [pickedImage, setPickedImage] = useState();
-  const takeImageHandler = async () => {
+  const verifyPermissions = async () => {
     try {
-      const image = await ImagePicker.openCamera({
-        width: 300,
-        height: 400,
-        cropping: true,
-        cropperCircleOverlay: true,
-        compressImageQuality: 0.5,
-      });
-      setPickedImage(image.path);
+      const result = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.CAMERA,PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,PermissionsAndroid.PERMISSIONS.READ_CONTACTS]
+      );
+      if (result) {
+          //console.log(result);
+          return true;
+      } else {
+        return false;
+      }  
     } catch (error) {
-      if (error) {
-        OpenAppSettings.open();
-      }
+       console.log(error)
+       throw error
     }
+    
+  };
+
+  const takeImageHandler = async () => {
+      const hasPermission = await verifyPermissions();
+      if (!hasPermission) {
+        return;
+      }
+      const image = await ImagePicker.launchCameraAsync({
+        allowsEditing: false,
+        aspect: [16, 9],
+        quality: 0.5
+      });
+      setPickedImage(image.uri);
+      props.onImageTake(image.uri)
   };
 
   return (

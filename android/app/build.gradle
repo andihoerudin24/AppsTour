@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 import com.android.build.OutputFile
 
 /**
@@ -206,6 +206,7 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
+    addUnimodulesDependencies()
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

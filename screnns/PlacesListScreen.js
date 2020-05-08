@@ -7,14 +7,13 @@ import PlaceitemComponent from "../components/placeitem";
 
 const PlacesListScreen = (props) => {
   const place = useSelector((state) => state.places.places);
-  console.log("place", place);
   return (
     <FlatList
       data={place}
       keyExtractor={(item) => item.id}
       renderItem={(itemData) => (
         <PlaceitemComponent
-          image={null}
+          image={itemData.item.imageUri}
           title={itemData.item.title}
           address={null}
           onSelect={() => {

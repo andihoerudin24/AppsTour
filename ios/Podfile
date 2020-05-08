@@ -83,6 +83,10 @@ target 'MyApp' do
 
   pod 'RNOpenAppSettings', :path => '../node_modules/react-native-app-settings'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+
   target 'MyAppTests' do
     inherit! :complete
     # Pods for testing

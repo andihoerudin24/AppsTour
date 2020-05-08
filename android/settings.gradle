@@ -1,4 +1,10 @@
 rootProject.name = 'MyApp'
+apply from: '../node_modules/react-native-unimodules/gradle.groovy'
+includeUnimodulesProjects()
+include ':react-native-fetch-blob'
+project(':react-native-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fetch-blob/android')
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
 include ':react-native-app-settings'
 project(':react-native-app-settings').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-app-settings/android')
 include ':react-native-image-crop-picker'
