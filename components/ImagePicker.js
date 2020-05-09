@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Color from "../constants/Color";
 //import ImagePicker from "react-native-image-crop-picker";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 //import OpenAppSettings from "react-native-app-settings";
 
 const ImagePickers = (props) => {
@@ -18,33 +18,35 @@ const ImagePickers = (props) => {
   const verifyPermissions = async () => {
     try {
       const result = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.CAMERA,PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,PermissionsAndroid.PERMISSIONS.READ_CONTACTS]
-      );
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      ]);
       if (result) {
-          //console.log(result);
-          return true;
+        //console.log(result);
+        return true;
       } else {
         return false;
-      }  
+      }
     } catch (error) {
-       console.log(error)
-       throw error
+      console.log(error);
+      throw error;
     }
-    
   };
 
   const takeImageHandler = async () => {
-      const hasPermission = await verifyPermissions();
-      if (!hasPermission) {
-        return;
-      }
-      const image = await ImagePicker.launchCameraAsync({
-        allowsEditing: false,
-        aspect: [16, 9],
-        quality: 0.5
-      });
-      setPickedImage(image.uri);
-      props.onImageTake(image.uri)
+    const hasPermission = await verifyPermissions();
+    if (!hasPermission) {
+      return;
+    }
+    const image = await ImagePicker.launchCameraAsync({
+      allowsEditing: false,
+      aspect: [16, 9],
+      quality: 0.5,
+    });
+    setPickedImage(image.uri);
+    props.onImageTake(image.uri);
   };
 
   return (
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
   imagePreview: {
     width: "100%",
     height: 200,
-    marginBottom: 10,
+    marginBottom: 15,
     justifyContent: "center",
     alignItems: "center",
     borderColor: "#ccc",
