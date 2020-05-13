@@ -18,6 +18,15 @@ const LocationPicker = (props) => {
   const [pickedLocation, setpickedLocation] = useState();
   // console.log(pickedLocation)
   const [isFetching, setisFetching] = useState(false);
+
+  const mapPickedLocation = props.route.params ? props.route.params.pickedLocation : null
+
+  useEffect(() => {
+    if (mapPickedLocation) {
+      setpickedLocation(mapPickedLocation)
+    }
+  }, [mapPickedLocation])
+
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
     if (result.status !== "granted") {
@@ -58,13 +67,17 @@ const LocationPicker = (props) => {
     setisFetching(false);
   };
 
-  const pickedOnMap = () =>{
-      props.navigation.navigate('Map')
-  }
+  const pickedOnMap = () => {
+    props.navigation.navigate("Map");
+  };
 
   return (
     <View style={styles.locationPicker}>
-      <MapPreview style={styles.mapPreview} location={pickedLocation} onPress={pickedOnMap}>
+      <MapPreview
+        style={styles.mapPreview}
+        location={pickedLocation}
+        onPress={pickedOnMap}
+      >
         {isFetching ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : (
@@ -72,18 +85,17 @@ const LocationPicker = (props) => {
         )}
       </MapPreview>
       <View style={styles.actions}>
-      <Button
-        title="Get User Location"
-        color={Colors.primary}
-        onPress={getLocationHandler}
-      />
-      <Button
-        title="Picked On Map"
-        color={Colors.primary}
-        onPress={pickedOnMap}
-      />
+        <Button
+          title="Get User Location"
+          color={Colors.primary}
+          onPress={getLocationHandler}
+        />
+        <Button
+          title="Picked On Map"
+          color={Colors.primary}
+          onPress={pickedOnMap}
+        />
       </View>
-      
     </View>
   );
 };
@@ -99,11 +111,11 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderWidth: 1,
   },
-  actions:{
-    flexDirection:'row',
-    justifyContent:'space-around',
-    width:'100%',
-  }
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
 });
 
 export default LocationPicker;

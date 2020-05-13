@@ -7,7 +7,7 @@ import PlacesDetailScreen, {
   screenOptionsPlaceDetail,
 } from "../screnns/PlaceDetailScreen";
 import NewPlacesScreen, { screenoptions } from "../screnns/NewPlaceScreen";
-import MapScreen from "../screnns/MapScreen";
+import MapScreen,{Mapscreenoptions} from "../screnns/MapScreen";
 import Color from "../constants/Color";
 
 const Stack = createStackNavigator();
@@ -38,7 +38,11 @@ const PlacesNavigator = () => {
           component={NewPlacesScreen}
           options={screenoptions}
         />
-        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen 
+          name="Map" 
+          component={MapScreen} 
+          options={Mapscreenoptions} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
