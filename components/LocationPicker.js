@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import Colors from "../constants/Color";
 import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
-//import * as TaskManager from 'expo-task-manager';
-//const LOCATION_TASK_NAME = 'background-location-task';
+import * as Permissions from "expo-permissions"; 
 import MapPreview from "./MapPreview";
 
 const LocationPicker = (props) => {
@@ -21,11 +19,13 @@ const LocationPicker = (props) => {
 
   const mapPickedLocation = props.route.params ? props.route.params.pickedLocation : null
 
+  const {onLocationPicked} = props;
   useEffect(() => {
     if (mapPickedLocation) {
       setpickedLocation(mapPickedLocation)
+      onLocationPicked(mapPickedLocation)
     }
-  }, [mapPickedLocation])
+  }, [mapPickedLocation,onLocationPicked])
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -48,11 +48,14 @@ const LocationPicker = (props) => {
     try {
       setisFetching(true);
       const loc = await Location.getCurrentPositionAsync({ timeout: 5000 });
-      console.log(loc);
       setpickedLocation({
         lat: loc.coords.latitude,
         lng: loc.coords.longitude,
       });
+      props.onLocationPicked({
+        lat: loc.coords.latitude,
+        lng: loc.coords.longitude,
+      })
     } catch (error) {
       Alert.alert(
         "Could Not Fetch Location",
